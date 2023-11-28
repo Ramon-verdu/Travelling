@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    
+    <meta property="og:site_name" content="Stack code lab">
+    <link rel="stylesheet" href="asset/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,400i,700,700i,600,600i">
+    <link rel="stylesheet" href="asset/fonts/simple-line-icons.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.10.0/baguetteBox.min.css">
+    <link rel="stylesheet" href="asset/css/vanilla-zoom.min.css">
+    <link rel="icon" type="image/x-icon" href="../assets/img/travell.png">
+    <title>Chat</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
+    <style>
+        /* Estilos CSS */
+
+        /* Estilos del área de texto */
+        .textarea {
+            /* Tamaño y posición */
+            width: calc(100% - 10px);
+            height: calc(100vh - 150px);
+            margin-left: 10px;
+            /* Estilos de fuente */
+            font-size: 16px;
+            font-family: 'Roboto', sans-serif;
+            /* Espaciado y relleno */
+            padding: 20px;
+            padding-right: 140px;
+            /* Otras propiedades */
+            line-height: 180%;
+            vertical-align: top;
+            cursor: auto;
+            resize: none;
+            outline: none;
+            border: none;
+            background-color: #f2f2f2;
+            overflow: auto;
+            border-radius: 10px;
+            margin: 10px;
+        }
+
+        /* Estilos de la barra de desplazamiento */
+        .textarea::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        .textarea::-webkit-scrollbar-thumb {
+            background: #cacaca;
+            border-radius: 4px;
+        }
+
+        /* Estilos de los mensajes */
+        .message {
+            display: flex;
+            justify-content: flex-start;
+        }
+
+        /* Estilos del mensaje del usuario */
+        .user-message {
+            background-color: #eff6ff;
+            color: #000000;
+            margin-right: 10px;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Estilos del mensaje del chatbot */
+        .bot-message {
+            background-color: #f8f8f8;
+            color: #333333;
+            margin-left: 10px;
+            border-radius: 10px;
+        }
+
+        /* Estilos del fondo gris */
+        .fondo-gris {
+            background-color: #ecebeb;
+            border-radius: 10px;
+            padding: 20px;
+        }
+
+        .text-xs {
+            font-size: 10px;
+        }
+    </style>
+     <nav class="navbar navbar-light navbar-expand-lg fixed-top bg-white clean-navbar" style="color: rgb(59,153,224);">
+        <div class="container"><a class="navbar-brand logo" href="inicioT.php" style="color: rgb(59,153,224);">Travelling</a><button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-1"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navcol-1">
+                <ul class="navbar-nav ms-auto" style="margin-left: 41% !important;">
+                    <li class="nav-item"><a class="nav-link active" href="../inicioT.php" style="color: rgb(59,153,224);">Home</a></li>
+                    
+                    <li class="nav-item"><a class="nav-link" href="../tutrabajoT.php" style="color: rgb(59,153,224);">Trabajo</a></li>
+                  
+                    <li class="nav-item"><a class="nav-link" href="../listadoT.php" style="color: rgb(59,153,224);">Listado de Trabajadores</a></li>
+ 
+ 
+         
+              
+                </ul>
+            </div>
+        </div>
+    </nav>
+</head>
+
+<body>
+    
+    <main class="my-2">
+        <div class="container" style="margin-top: 2%;">
+            <div class="row" id="descripcion">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-12 my-5">
+                            <h1 style="text-align: center;">
+                                ChatBot
+                            </h1>
+                        </div>
+                    </div>
+                    <div class="row my-3">
+                        <div class="col-md-2">
+
+                        </div>
+                        <div class="col-md-3">
+                            
+                          
+                        </div>
+                        <div class="col-md-3">
+                           
+                        </div>
+                        <div class="col-md-3">
+                            
+                          
+                        </div>
+                        <div class="col-md-1">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div id="chat-log" class="textarea" style="display: none;"></div>
+                <form id="chat-form" method="post">
+                    <div class="input-group mb-3">
+                        <input class="form-control" type="text" name="chat-input" id="chat-input" placeholder="Escribe tu mensaje..." />
+                        <button class="btn btn-outline-secondary" type="submit">Enviar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div id="error-message"></div>
+        <div style="display: flex; justify-content: center; align-items: center">
+            <span style="display: none" id="barra">
+                <img style="width: 286px" src="./barra.gif" alt="Procesando..." />
+            </span>
+        </div>
+        <div class="px-3 pb-3 pt-2 text-center text-xs text-gray-600 dark:text-gray-300 md:px-4 md:pb-6 md:pt-3">
+            <footer class="page-footer dark">
+                <div class="footer-copyright">
+                    <p>© 2023 Ramon Verdú :)</p>
+                </div>
+            </footer> </div>
+    </main>
+
+    <!-- Archivo de script para la funcionalidad del chat -->
+    <script src="chat.js"></script>
+    <!-- Librería de jQuery -->
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <!-- Librería de Font Awesome -->
+    <script defer src="https://use.fontawesome.com/releases/v5.15.4/js/all.js" integrity="sha384-rOA1PnstxnOBLzCLMcre8ybwbTmemjzdNlILg8O7z1lUkLXozs4DHonlDtnE7fpc" crossorigin="anonymous"></script>
+</body>
+
+</html>
